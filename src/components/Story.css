@@ -1,5 +1,6 @@
 .story {
   display: flex;
+  align-items: center;
   line-height: 24px;
   white-space: nowrap;
   margin: 10px 0;

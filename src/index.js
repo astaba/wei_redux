@@ -26,7 +26,7 @@ const stories = [
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App stories={stories}/>
+    <App stories={stories} onArchive={() => {}} />
   </React.StrictMode>
 );
 

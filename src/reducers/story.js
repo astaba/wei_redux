@@ -18,10 +18,10 @@ const INITIAL_STATE = [
 ];
 
 const storyReducer = (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     default:
       return state;
   }
-}
+};
 
 export default storyReducer;

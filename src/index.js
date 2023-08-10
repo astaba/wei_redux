@@ -3,12 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
-import store from './store/index'
+import store from "./store/index";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App stories={store.getState()} onArchive={() => {}} />
+    <App stories={store.getState().storyState} onArchive={() => {}} />
   </React.StrictMode>
 );
 

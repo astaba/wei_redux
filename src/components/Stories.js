@@ -1,16 +1,40 @@
-import React from 'react'
-import './Stories.css'
+import React from "react";
+import "./Stories.css";
 
-import Story from './Story'
+import Story from "./Story";
+import StoriesHeader from "./StoriesHeader";
 
-const Stories = ({stories}) => {
+const COLUMNS = {
+  title: {
+    label: "Title",
+    width: "40%",
+  },
+  author: {
+    label: "Author",
+    width: "30%",
+  },
+  comments: {
+    label: "Comments",
+    width: "10%",
+  },
+  points: {
+    label: "Points",
+    width: "10%",
+  },
+  archive: {
+    width: "10%",
+  },
+};
+
+const Stories = ({ stories }) => {
   return (
-    <div className='stories'>
+    <div className="stories">
+      <StoriesHeader columns={COLUMNS} />
       {(stories || []).map((story) => (
-        <Story key={story.objectID} story={story} />
+        <Story key={story.objectID} story={story} columns={COLUMNS} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Stories  
+export default Stories;

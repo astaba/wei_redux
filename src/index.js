@@ -5,16 +5,21 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/index";
 import { STORY_ARCHIVE } from "./constants/actionTypes";
+import { getReadableStories } from "./selectors/story";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App
-      stories={store.getState().storyState}
+      stories={getReadableStories(store.getState())}
       onArchive={(id) => store.dispatch({ type: STORY_ARCHIVE, id })}
     />
   </React.StrictMode>
 );
+
+store.subscribe(() => {
+  console.log("Initial state", store.getState());
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

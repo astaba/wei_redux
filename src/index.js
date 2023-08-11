@@ -4,11 +4,15 @@ import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/index";
+import { STORY_ARCHIVE } from "./constants/actionTypes";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App stories={store.getState().storyState} onArchive={() => {}} />
+    <App
+      stories={store.getState().storyState}
+      onArchive={(id) => store.dispatch({ type: STORY_ARCHIVE, id })}
+    />
   </React.StrictMode>
 );
 

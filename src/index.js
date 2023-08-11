@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/index";
-import { STORY_ARCHIVE } from "./constants/actionTypes";
+import { actStoryArchive } from "./actions/archive";
 import { getReadableStories } from "./selectors/story";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -13,7 +13,7 @@ function render() {
     <React.StrictMode>
       <App
         stories={getReadableStories(store.getState())}
-        onArchive={(id) => store.dispatch({ type: STORY_ARCHIVE, id })}
+        onArchive={(id) => store.dispatch(actStoryArchive(id))}
       />
     </React.StrictMode>
   );

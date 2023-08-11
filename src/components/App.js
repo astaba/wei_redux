@@ -3,10 +3,10 @@ import "./App.css";
 
 import Stories from "./Stories";
 
-const App = ({ stories, onArchive }) => {
+const App = () => {
   return (
     <div className="app">
-      <Stories stories={stories} onArchive={onArchive}/>
+      <Stories />
     </div>
   );
 };

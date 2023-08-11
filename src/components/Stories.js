@@ -5,7 +5,6 @@ import "./Stories.css";
 import Story from "./Story";
 import StoriesHeader from "./StoriesHeader";
 import { getReadableStories } from "../selectors/story";
-import { actStoryArchive } from "../actions/archive";
 
 const COLUMNS = {
   title: {
@@ -29,7 +28,7 @@ const COLUMNS = {
   },
 };
 
-const Stories = ({ stories, onArchive }) => {
+const Stories = ({ stories }) => {
   return (
     <div className="stories">
       <StoriesHeader columns={COLUMNS} />
@@ -38,7 +37,6 @@ const Stories = ({ stories, onArchive }) => {
           key={story.objectID}
           story={story}
           columns={COLUMNS}
-          onArchive={onArchive}
         />
       ))}
     </div>
@@ -48,8 +46,5 @@ const Stories = ({ stories, onArchive }) => {
 const mapStateToProps = (state) => ({
   stories: getReadableStories(state),
 });
-const mapDispatchToProps = (dispatch) => ({
-  onArchive: (id) => dispatch(actStoryArchive(id)),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Stories);
+export default connect(mapStateToProps)(Stories);

@@ -7,7 +7,7 @@ import SearchStories from "./SearchStories";
 const App = () => {
   return (
     <div className="app">
-      <div className="interactions">
+      <div className="centertxt">
         <SearchStories />
       </div>
       <Stories />

@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import "./Stories.css";
 import Story from "./Story";
 import StoriesHeader from "./StoriesHeader";
-import { getReadableStories } from "../selectors/story";
+import {
+  getReadableStories,
+  getFetchLoading,
+  getStoryFetchError,
+} from "../selectors/story";
 
 const COLUMNS = {
   title: {
@@ -28,16 +32,14 @@ const COLUMNS = {
   },
 };
 
-const Stories = ({ stories }) => {
+const Stories = ({ stories, isLoading, error }) => {
   return (
     <div className="stories">
       <StoriesHeader columns={COLUMNS} />
+      {isLoading ? <h3 className="centertxt">Loading ...</h3> : null}
+      {error ? <h4 className="centertxt">{error}</h4> : null}
       {(stories || []).map((story) => (
-        <Story
-          key={story.objectID}
-          story={story}
-          columns={COLUMNS}
-        />
+        <Story key={story.objectID} story={story} columns={COLUMNS} />
       ))}
     </div>
   );
@@ -45,6 +47,8 @@ const Stories = ({ stories }) => {
 
 const mapStateToProps = (state) => ({
   stories: getReadableStories(state),
+  isLoading: getFetchLoading(state),
+  error: getStoryFetchError(state),
 });
 
 export default connect(mapStateToProps)(Stories);

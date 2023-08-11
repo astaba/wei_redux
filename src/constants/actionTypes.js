@@ -1,1 +1,4 @@
 export const STORY_ARCHIVE = "STORY_ARCHIVE";
+export const STORY_FETCH = "STORY_FETCH";
+export const STORY_ADD = "STORY_ADD";
+export const STORY_FETCH_FAILED = "STORY_FETCH_FAILED";

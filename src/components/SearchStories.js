@@ -1,46 +1,32 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { Button } from "./Button";
 import { actStoryFetch } from "../actions/story";
 
-export class SearchStories extends Component {
-  constructor(props) {
-    super(props);
+const SearchStories = () => {
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
 
-    this.state = {
-      query: "",
-    };
-  }
-
-  handleChange = (e) => {
-    this.setState({ query: e.target.value });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const validQuery = this.state.query.trim();
+    const validQuery = query.trim();
     if (validQuery) {
-      this.props.launchGetStories(validQuery);
-      this.setState({ query: "" });
+      dispatch(actStoryFetch(validQuery));
+      setQuery("");
     }
   };
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <Button type="submit">Search</Button>
+    </form>
+  );
+};
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          value={this.state.query}
-          onChange={this.handleChange}
-        />
-        <Button type="submit">Search</Button>
-      </form>
-    );
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  launchGetStories: (query) => dispatch(actStoryFetch(query)),
-});
-export default connect(null, mapDispatchToProps)(SearchStories);
+export default SearchStories;

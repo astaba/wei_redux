@@ -1,11 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import "./Story.css";
-import { actStoryArchive } from "../actions/archive";
+import { archiveActions } from "../rtk-slice/archive";
 import { ButtonInline } from "./Button";
 
-const Story = ({ story, columns, onArchive }) => {
+const Story = ({ story, columns }) => {
+  const dispatch = useDispatch();
   const { title, url, author, num_comments, points, objectID } = story;
 
   return (
@@ -17,7 +18,7 @@ const Story = ({ story, columns, onArchive }) => {
       <span style={{ width: columns.comments.width }}>{num_comments}</span>
       <span style={{ width: columns.points.width }}>{points}</span>
       <span style={{ width: columns.archive.width }}>
-        <ButtonInline onClick={() => onArchive(objectID)}>
+        <ButtonInline onClick={() => dispatch(archiveActions.archiveStory(objectID))}>
           Archive
         </ButtonInline>
       </span>
@@ -25,8 +26,4 @@ const Story = ({ story, columns, onArchive }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onArchive: (id) => dispatch(actStoryArchive(id)),
-});
-
-export default connect(null, mapDispatchToProps)(Story);
+export default Story;

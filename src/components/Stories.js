@@ -1,14 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "./Stories.css";
 import Story from "./Story";
 import StoriesHeader from "./StoriesHeader";
-import {
-  getReadableStories,
-  getFetchLoading,
-  getStoryFetchError,
-} from "../selectors/story";
+import { getReadableStories } from "../selectors/story";
 
 const COLUMNS = {
   title: {
@@ -32,12 +28,18 @@ const COLUMNS = {
   },
 };
 
-const Stories = ({ stories, isLoading, error }) => {
+const Stories = () => {
+  const { isLoading, stories, isError } = useSelector((state) => ({
+    isLoading: state.storyState.isLoading,
+    stories: getReadableStories(state),
+    isError: state.storyState.isError,
+  }));
+  
   return (
     <div className="stories">
       <StoriesHeader columns={COLUMNS} />
       {isLoading ? <h3 className="centertxt">Loading ...</h3> : null}
-      {error ? <h4 className="centertxt">{error}</h4> : null}
+      {isError ? <h4 className="centertxt">{isError}</h4> : null}
       {(stories || []).map((story) => (
         <Story key={story.objectID} story={story} columns={COLUMNS} />
       ))}
@@ -45,10 +47,4 @@ const Stories = ({ stories, isLoading, error }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  stories: getReadableStories(state),
-  isLoading: getFetchLoading(state),
-  error: getStoryFetchError(state),
-});
-
-export default connect(mapStateToProps)(Stories);
+export default Stories;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { Button } from "./Button";
-import { actStoryFetch } from "../actions/story";
+import { launchGetStory } from "../rtk-slice/story";
 
 const SearchStories = () => {
   const [query, setQuery] = useState("");
@@ -12,11 +12,11 @@ const SearchStories = () => {
     e.preventDefault();
     const validQuery = query.trim();
     if (validQuery) {
-      dispatch(actStoryFetch(validQuery));
+      dispatch(launchGetStory(validQuery));
       setQuery("");
     }
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <input

@@ -9,9 +9,8 @@ function* handleStoryFetch(action) {
   try {
     const data = yield call(fetchStories, query);
     yield put(actStoryAdd(data.hits));
-  }
-  catch(error) {
-    yield put(actStoryFetchFailed(error))
+  } catch (error) {
+    yield put(actStoryFetchFailed(error));
   }
 }
 
